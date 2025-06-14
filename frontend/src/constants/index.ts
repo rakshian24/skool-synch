@@ -7,36 +7,32 @@ export const screenSize = {
 };
 
 export const ROUTES = {
-  REGISTER: "/",
+  LANDING: "/",
+  REGISTER: "/register",
   LOGIN: "/login",
   LOGOUT: "/logout",
   DASHBOARD: "/dashboard",
   PROFILE: "/profile",
+  FEATURES: "/features",
+  PRICING: "/pricing",
+  DEMO: "/demo",
+  SUPPORT: "/support",
 };
 
 export const colors = {
+  primary: "#4F46E5",
+  primaryLight: "#ECECFE",
+  primaryDark: "#3A2FBC",
   white: "#ffffff",
-  primaryBlue: "#1976d2",
-  grey: "#EEEEEE",
-  lightGrey: "#F6F6F6",
+  black: "#000000",
+  lightGrey: "#FAFCFC",
+  charcoal: "#383838",
+  contentSecondary: "#545454",
+  contentTertiary: "#6B6B6B",
   red: "#C03000",
   lightRed: "#F2D1CC",
-  black: "#000000",
-  charcoal: "#383838",
-  darkGrey: "#E3E3E3",
-  contentTertiary: "#6B6B6B",
-  contentSecondary: "#545454",
-
-  primary: "#faf6ea",
-  secondary: "#285e86",
-  tertiary: "#57697a",
-  lightBrown: "#87746e",
-  brown: "#b78063",
-  darkBlue: "#264e86",
-
-  // App pallete
-  blue1: "#6366f1",
+  grey: "#EEEEEE",
   dark: "#1C283A",
-  primaryBtnColor: "#4E46E5",
-  lightGrey1: "#FAFCFC",
+  orange: "#F59E0B",
+  orangeLight: "#FFF7ED",
 };

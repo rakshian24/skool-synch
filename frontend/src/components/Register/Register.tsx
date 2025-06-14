@@ -177,7 +177,7 @@ const Register = () => {
                   style={{
                     marginLeft: "4px",
                     fontWeight: 500,
-                    color: colors.brown,
+                    color: colors.primary,
                   }}
                 >
                   Sign In

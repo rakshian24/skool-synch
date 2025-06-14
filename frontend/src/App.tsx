@@ -3,13 +3,12 @@ import Header from "./components/Header";
 import { colors, ROUTES, screenSize } from "./constants";
 import { useAuth } from "./context/authContext";
 import { Stack, useMediaQuery } from "@mui/material";
-import Home from "./pages/home";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/dashboard";
-import Footer from "./components/Footer/Footer";
 import Profile from "./pages/profile";
+import Landing from "./pages/landing";
 
 function App() {
   const { user, isLoggedIn } = useAuth();
@@ -21,19 +20,18 @@ function App() {
 
   return (
     <Stack sx={{ height: "100vh", minHeight: "100vh", margin: 0 }}>
-      {!isTablet && isLoggedIn && <Header />}
+      <Header />
       <Stack
         sx={{
           height: "100%",
           overflowY: "auto",
-          bgcolor: colors.lightGrey1,
+          bgcolor: colors.lightGrey,
         }}
       >
         <Routes>
-          <Route path={REGISTER} element={<Home />}>
-            <Route element={<Register />} index />
-            <Route element={<Login />} path={LOGIN} />
-          </Route>
+          <Route element={<Landing />} index />
+          <Route element={<Register />} path={REGISTER} />
+          <Route element={<Login />} path={LOGIN} />
         </Routes>
         {isLoggedIn && (
           <Stack
@@ -56,7 +54,6 @@ function App() {
           </Stack>
         )}
       </Stack>
-      {isTablet && isLoggedIn && <Footer userInfo={user} />}
     </Stack>
   );
 }
