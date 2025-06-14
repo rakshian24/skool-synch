@@ -3,12 +3,12 @@ import Header from "./components/Header";
 import { colors, ROUTES, screenSize } from "./constants";
 import { useAuth } from "./context/authContext";
 import { Stack, useMediaQuery } from "@mui/material";
-import Register from "./components/Register/Register";
-import Login from "./components/Login/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/dashboard";
 import Profile from "./pages/profile";
 import Landing from "./pages/landing";
+import LoginPage from "./pages/login/LoginPage";
+import RegisterPage from "./pages/Register/RegisterPage";
 
 function App() {
   const { user, isLoggedIn } = useAuth();
@@ -30,8 +30,8 @@ function App() {
       >
         <Routes>
           <Route element={<Landing />} index />
-          <Route element={<Register />} path={REGISTER} />
-          <Route element={<Login />} path={LOGIN} />
+          <Route element={<RegisterPage />} path={REGISTER} />
+          <Route element={<LoginPage />} path={LOGIN} />
         </Routes>
         {isLoggedIn && (
           <Stack

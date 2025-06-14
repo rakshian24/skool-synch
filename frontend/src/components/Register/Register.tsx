@@ -59,7 +59,7 @@ const Register = () => {
   };
 
   return (
-    <Stack gap={isTablet ? 3 : 5} width={"100%"} mt={isTablet ? 5 : 0}>
+    <Stack gap={isTablet ? 3 : 5} width={"100%"}>
       <Typography fontSize={isTablet ? 24 : 30} fontWeight={600}>
         Create an account
       </Typography>
@@ -164,12 +164,18 @@ const Register = () => {
             <ErrorBox formState={formState} style={{ mb: 2 }} />
             <Stack
               display={"flex"}
-              direction={isTablet ? "column" : "row"}
               justifyContent={"space-between"}
               alignItems={isTablet ? "flex-start" : "center"}
               mt={1}
               gap={2}
             >
+              <Button
+                buttonText="Register"
+                onClick={() => onSubmitHandler}
+                disabled={isFormDisabled}
+                endIcon={<NavigateNext />}
+                styles={{ width: "100%" }}
+              />
               <Typography>
                 Already have an account?
                 <Link
@@ -183,13 +189,6 @@ const Register = () => {
                   Sign In
                 </Link>
               </Typography>
-              <Button
-                buttonText="Register"
-                onClick={() => onSubmitHandler}
-                disabled={isFormDisabled}
-                endIcon={<NavigateNext />}
-                styles={{ alignSelf: "flex-end" }}
-              />
             </Stack>
           </Stack>
         </form>

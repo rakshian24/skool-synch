@@ -23,10 +23,11 @@ import { getInitials } from "../utils";
 import ProfileTab from "./ProfileTab";
 import { FaGraduationCap } from "react-icons/fa6";
 import CustomButton from "./CustomButton";
-import { LoginOutlined } from "@mui/icons-material";
+import { LoginOutlined, LogoutOutlined } from "@mui/icons-material";
+import client from "../apolloClient";
 
 const Header = () => {
-  const { user } = useAuth();
+  const { user, logoutUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const isLoggedIn = !!user?.userId;
@@ -52,6 +53,12 @@ const Header = () => {
     handleClose();
   };
 
+  const handleLogout = () => {
+    client.clearStore();
+    logoutUser();
+    navigate(ROUTES.LOGIN);
+  };
+
   const open = Boolean(anchorEl);
 
   const navItems = [
@@ -75,7 +82,7 @@ const Header = () => {
           bgcolor: colors.white,
         }}
       >
-        <Link to={ROUTES.LANDING}>
+        <Link to={isLoggedIn ? ROUTES.DASHBOARD : ROUTES.LANDING}>
           <Box>
             <Box display="flex" alignItems="center" gap={1.5}>
               <FaGraduationCap size={30} color={colors.primary} />
@@ -113,19 +120,21 @@ const Header = () => {
               );
             })}
 
-            <Stack direction={"row"} gap={2}>
-              <CustomButton
-                buttonText="Sign In"
-                startIcon={<LoginOutlined />}
-                onClick={() => navigate(ROUTES.LOGIN)}
-                priority="secondary"
-              />
-              <CustomButton
-                buttonText="Sign Up"
-                startIcon={<LoginOutlined />}
-                onClick={() => navigate(ROUTES.REGISTER)}
-              />
-            </Stack>
+            {!isLoggedIn && (
+              <Stack direction={"row"} gap={2}>
+                <CustomButton
+                  buttonText="Sign In"
+                  startIcon={<LoginOutlined />}
+                  onClick={() => navigate(ROUTES.LOGIN)}
+                  priority="secondary"
+                />
+                <CustomButton
+                  buttonText="Sign Up"
+                  startIcon={<LoginOutlined />}
+                  onClick={() => navigate(ROUTES.REGISTER)}
+                />
+              </Stack>
+            )}
           </Stack>
         ) : (
           <IconButton
@@ -205,29 +214,45 @@ const Header = () => {
                 <Divider sx={{ my: 0.5, mx: 1 }} />
               </Box>
             ))}
-            <ListItem>
-              <CustomButton
-                buttonText="Sign In"
-                startIcon={<LoginOutlined />}
-                onClick={() => {
-                  navigate(ROUTES.LOGIN);
-                  setDrawerOpen(false);
-                }}
-                priority="secondary"
-                style={{ width: "100%" }}
-              />
-            </ListItem>
-            <ListItem>
-              <CustomButton
-                buttonText="Sign Up"
-                startIcon={<LoginOutlined />}
-                onClick={() => {
-                  navigate(ROUTES.REGISTER);
-                  setDrawerOpen(false);
-                }}
-                style={{ width: "100%" }}
-              />
-            </ListItem>
+            {!isLoggedIn ? (
+              <>
+                <ListItem>
+                  <CustomButton
+                    buttonText="Sign In"
+                    startIcon={<LoginOutlined />}
+                    onClick={() => {
+                      navigate(ROUTES.LOGIN);
+                      setDrawerOpen(false);
+                    }}
+                    priority="secondary"
+                    style={{ width: "100%" }}
+                  />
+                </ListItem>
+                <ListItem>
+                  <CustomButton
+                    buttonText="Sign Up"
+                    startIcon={<LoginOutlined />}
+                    onClick={() => {
+                      navigate(ROUTES.REGISTER);
+                      setDrawerOpen(false);
+                    }}
+                    style={{ width: "100%" }}
+                  />
+                </ListItem>
+              </>
+            ) : (
+              <ListItem>
+                <CustomButton
+                  buttonText="Logout"
+                  startIcon={<LogoutOutlined />}
+                  onClick={() => {
+                    handleLogout();
+                    setDrawerOpen(false);
+                  }}
+                  style={{ width: "100%" }}
+                />
+              </ListItem>
+            )}
           </List>
         </Box>
       </Drawer>

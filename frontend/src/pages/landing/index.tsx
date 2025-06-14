@@ -18,13 +18,23 @@ import {
   FaUsers,
   FaUserTie,
 } from "react-icons/fa6";
+import { useAuth } from "../../context/authContext";
+import { useEffect } from "react";
 
 type Props = {};
 
 const Landing = (props: Props) => {
+  const { user } = useAuth();
+  const isLoggedIn = !!user?.userId;
   const navigate = useNavigate();
   const isTablet = useMediaQuery(`(max-width:${screenSize.tablet})`);
   const isPcAndAbove = useMediaQuery(`(min-width:${screenSize.pc})`);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(ROUTES.DASHBOARD);
+    }
+  }, [isLoggedIn, navigate]);
 
   const features = [
     {
@@ -106,20 +116,12 @@ const Landing = (props: Props) => {
               <Button
                 buttonText="Get Started - It's Free"
                 onClick={() => navigate(ROUTES.REGISTER)}
-                styles={{
-                  py: "8px",
-                  borderRadius: "8px",
-                  px: "16px",
-                }}
               />
               <Button
                 buttonText="Book a Live Demo"
                 priority="secondary"
                 onClick={() => navigate(ROUTES.DEMO)}
                 styles={{
-                  py: "8px",
-                  borderRadius: "8px",
-                  px: "16px",
                   "&:hover": {
                     bgcolor: colors.primaryLight,
                     boxShadow: "none",
@@ -131,14 +133,14 @@ const Landing = (props: Props) => {
           <Box
             sx={{
               width: "100%",
-              maxWidth: { xs: "100%", sm: "450px" }, // full width on mobile/tablet, max 500px on larger
+              maxWidth: { xs: "100%", sm: "450px" },
             }}
           >
             <img
               src={HeroImage}
               alt="hero-image"
               style={{
-                width: "100%", // take full width of Box
+                width: "100%",
                 height: "auto",
                 borderRadius: "16px",
                 boxShadow:

@@ -11,7 +11,7 @@ import { ILoginFormValueTypes, InitialLoginFormValues } from "./helpers";
 import { emailRegex, textInputRegex } from "../../utils";
 import CustomInput from "../CustomInput";
 import { Link, useNavigate } from "react-router-dom";
-import { ROUTES, screenSize } from "../../constants";
+import { colors, ROUTES, screenSize } from "../../constants";
 import { useMutation } from "@apollo/client";
 import { useAuth } from "../../context/authContext";
 import { LOGIN_MUTATION } from "../../graphql/mutations";
@@ -53,7 +53,7 @@ const Login = () => {
   };
 
   return (
-    <Stack gap={isTablet ? 3 : 5} width={"100%"} mt={isTablet ? 5 : 0}>
+    <Stack gap={isTablet ? 3 : 5} width={"100%"}>
       <Typography fontSize={isTablet ? 24 : 30} fontWeight={600}>
         Login
       </Typography>
@@ -111,12 +111,18 @@ const Login = () => {
             <ErrorBox formState={formState} style={{ mb: 2 }} />
             <Stack
               display={"flex"}
-              direction={isTablet ? "column" : "row"}
               justifyContent={"space-between"}
               alignItems={isTablet ? "flex-start" : "center"}
               mt={1}
               gap={2}
             >
+              <Button
+                buttonText="Log in"
+                onClick={() => onSubmitHandler}
+                disabled={isFormDisabled}
+                endIcon={<NavigateNext />}
+                styles={{ width: "100%" }}
+              />
               <Typography>
                 Don't have an account?
                 <Link
@@ -124,18 +130,12 @@ const Login = () => {
                   style={{
                     marginLeft: "4px",
                     fontWeight: 500,
+                    color: colors.primary,
                   }}
                 >
                   Register here
                 </Link>
               </Typography>
-              <Button
-                buttonText="Log in"
-                onClick={() => onSubmitHandler}
-                disabled={isFormDisabled}
-                endIcon={<NavigateNext />}
-                styles={{ alignSelf: "flex-end" }}
-              />
             </Stack>
           </Stack>
         </form>
