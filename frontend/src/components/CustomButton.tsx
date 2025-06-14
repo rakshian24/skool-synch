@@ -39,8 +39,9 @@ const Button = ({
     sx={{
       ...{
         fontSize: "16px",
+        borderRadius: "8px",
         textTransform: "none",
-        p: endIcon ? "3px 10px" : startIcon ? "3px 10px" : "3px 10px",
+        p: endIcon ? "8px 16px" : startIcon ? "8px 16px" : "8px 16px",
         boxShadow: "none",
         bgcolor: priority === "primary" ? colors.primary : colors.white,
         color: priority === "primary" ? colors.white : colors.primary,
